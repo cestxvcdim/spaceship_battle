@@ -40,7 +40,7 @@ for i in range(num_of_enemies):
     enemy_x.append(random.randint(0, 978))
     enemy_y.append(random.randint(50, 150))
     enemy_x_change.append(0.5)
-    enemy_y_change.append(10)
+    enemy_y_change.append(0.05)
 
 # Пуля
 bullet_img = pygame.image.load('media/bullet.png')
@@ -69,6 +69,7 @@ def show_score(x, y):
 def game_over_text():
     over_text = game_over_font.render("GAME OVER", True, (255, 255, 255))
     screen.blit(over_text, (300, 300))
+    pygame.mixer.music.stop()
 
 
 def player(x, y):
@@ -131,19 +132,18 @@ while running:
     for i in range(num_of_enemies):
 
         # Конец игры
-        if enemy_y[i] > 800:
+        if enemy_y[i] > 700:
             for j in range(num_of_enemies):
                 enemy_y[j] = 2000
             game_over_text()
             break
 
         enemy_x[i] += enemy_x_change[i]
+        enemy_y[i] += enemy_y_change[i]
         if enemy_x[i] <= 0:
             enemy_x_change[i] = 0.5
-            enemy_y[i] += enemy_y_change[i]
         elif enemy_x[i] >= 978:
             enemy_x_change[i] = -0.5
-            enemy_y[i] += enemy_y_change[i]
 
         # Столкновение
         collision = is_collision(enemy_x[i], enemy_y[i], bullet_x, bullet_y)
