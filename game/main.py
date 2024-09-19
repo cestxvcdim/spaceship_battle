@@ -46,9 +46,9 @@ for i in range(num_of_enemies):
 bullet_img = pygame.image.load('media/bullet.png')
 bullet_img = pygame.transform.scale(bullet_img, (16, 16))
 bullet_x = 0
-bullet_y = 480
+bullet_y = 700
 bullet_x_change = 0
-bullet_y_change = 1
+bullet_y_change = 1.5
 bullet_state = "ready"  # "ready" - готово к стрельбе, "fire" - пуля в полете
 
 # Очки
@@ -148,7 +148,7 @@ while running:
         # Столкновение
         collision = is_collision(enemy_x[i], enemy_y[i], bullet_x, bullet_y)
         if collision:
-            bullet_y = 480
+            bullet_y = 700
             bullet_state = "ready"
             score_value += 1
             enemy_x[i] = random.randint(0, 736)
@@ -158,7 +158,7 @@ while running:
 
     # Движение пули
     if bullet_y <= 0:
-        bullet_y = 480
+        bullet_y = 700
         bullet_state = "ready"
 
     if bullet_state == "fire":
